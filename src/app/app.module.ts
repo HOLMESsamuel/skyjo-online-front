@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StartpageComponent } from './startpage/startpage.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartpageComponent
+    StartpageComponent, 
+    GameComponent
   ],
   imports: [
     HttpClientModule,

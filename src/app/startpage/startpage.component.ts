@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameRestService } from '../game-rest-service.service';
+import { Game } from '../game/game';
 
 @Component({
   selector: 'app-startpage',
@@ -9,7 +11,7 @@ import { GameRestService } from '../game-rest-service.service';
 })
 export class StartpageComponent {
 
-  constructor(private gameService: GameRestService) {}
+  constructor(private gameService: GameRestService, private router: Router) {}
 
   errorNewGame : boolean = false;
   errorNewGameMessage : string = "";
@@ -17,16 +19,14 @@ export class StartpageComponent {
   errorJoinGame : boolean = false;
   errorJoinGameMessage : string = "";
 
-  launchGame(value : string) {
-    if(value == null || value == "") {
+  launchGame(name : string) {
+    if(name == null || name == "") {
       this.setErrorNewGameMessage("You need to enter a name to create a game")
     } else {
-      this.gameService.createGame(value).subscribe({
+      this.gameService.createGame(name).subscribe({
         error: (err) => { this.handleCreateError(err) },
-        next: (game : any) => { console.log(game.id) }
+        next: (game : Game) => { this.disableErrorNewGameMessage(), this.router.navigate(['games', game.id, 'player', name]) }
       });
-      this.disableErrorNewGameMessage();
-      console.log(value);
     }
   }
 
@@ -36,10 +36,8 @@ export class StartpageComponent {
     } else {
       this.gameService.joinGame(id, name).subscribe({
         error: (err) => { this.handleJoinError(err) },
-        next: (game : any) => { console.log(game.id) }
+        next: (game : Game) => { this.disableErrorJoinGameMessage(), this.router.navigate(['games', game.id, 'player', name]) }
       });
-      this.disableErrorJoinGameMessage();
-      console.log(name, id);
     }
   }
 
@@ -75,9 +73,9 @@ export class StartpageComponent {
 
   handleCreateError(error : HttpErrorResponse) {
     if(error.status == 404) {
-      this.setErrorJoinGameMessage("This game id does not exists");
+      this.setErrorNewGameMessage("This game id does not exists");
     } else {
-      this.setErrorJoinGameMessage("There was an error while calling the server");
+      this.setErrorNewGameMessage("There was an error while calling the server");
     }
   }
 }
