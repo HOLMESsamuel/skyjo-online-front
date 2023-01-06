@@ -3,6 +3,7 @@ import { Game } from './game';
 import { ActivatedRoute } from '@angular/router';
 import { GameRestService } from '../game-rest-service.service';
 import { WebsocketService } from '../websocket.service';
+import { ClipboardService } from 'ngx-clipboard';
 import { takeUntil, Subject } from 'rxjs';
 
 @Component({
@@ -16,6 +17,7 @@ export class GameComponent implements OnInit{
   game: Game;
   playerName: string;
   isLoaded: boolean = false;
+  idCopied: boolean = false;
 
   message: string;
 
@@ -24,7 +26,8 @@ export class GameComponent implements OnInit{
   constructor(
     private websocketService: WebsocketService, 
     private gameService: GameRestService, 
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private clipboardService: ClipboardService) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id']
@@ -33,10 +36,23 @@ export class GameComponent implements OnInit{
       error: (err) => { console.log(err) },
       next: (game : Game) => { this.game = game, this.isLoaded = true }
     });
-    const gameSub$ = this.websocketService.connect(this.id).pipe(
+    const gameSub$ = this.websocketService.connect(this.id+this.playerName).pipe(
       takeUntil(this.destroyed$)
     );
-    gameSub$.subscribe(message => this.message = message);
+    gameSub$.subscribe(message => this.handleMessage(message));
+  }
+
+  handleMessage(message: any) {
+    this.message = message;
+    this.gameService.getGame(this.id).subscribe({
+      error: (err) => { console.log(err) },
+      next: (game : Game) => { this.game = game, this.isLoaded = true }
+    });
+  }
+
+  copyText() {
+    this.clipboardService.copyFromContent(this.id);
+    this.idCopied = true;
   }
 
 }
