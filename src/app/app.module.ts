@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ClipboardModule } from 'ngx-clipboard';
 import { StartpageComponent } from './startpage/startpage.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GameComponent } from './game/game.component';
@@ -18,6 +19,7 @@ import { GameComponent } from './game/game.component';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    ClipboardModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
