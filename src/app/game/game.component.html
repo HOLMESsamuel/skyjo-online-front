@@ -1,6 +1,25 @@
-<div *ngIf="isLoaded">
-    <p>game id is {{game.id}}</p>
-    <p>player name is {{playerName}}</p>
+<div class="is-overlay has-background-dark">
+    <div *ngIf="isLoaded">
+        <p>game id is {{game.id}}</p>
+        <p>player name is {{playerName}}</p>
+        <p>message is: {{message}}</p>
+        <table class="table is bordered">
+            <thead>
+                <tr>
+                    <th>Player name</th>
+                    <th>Ready</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let player of game.players">
+                    <th>{{player.name}}</th>
+                    <th class="has-text-success" *ngIf="player.state == 'ready'">yes</th>
+                    <th class="has-text-danger" *ngIf="player.state != 'ready'">no</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+
 
 <router-outlet></router-outlet>
