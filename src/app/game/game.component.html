@@ -48,7 +48,25 @@
                 </div>
             </div>
             <div class="column box block">
-                Auto
+                <div>
+                    {{player.name}}, choose two cards to begin.
+                </div>
+                <div id="board">
+                    <table class="table is-bordered is-centered">
+                        <tbody>
+                            <tr *ngFor="let line of player.board.grid">
+                                <th *ngFor="let card of line">
+                                    <button class="button is-primary is-active" *ngIf="card.visible; else elseBlock">
+                                        {{card.number}}
+                                    </button>
+                                    <ng-template #elseBlock>
+                                        <button class="button is-primary is-active">X</button>
+                                    </ng-template>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
