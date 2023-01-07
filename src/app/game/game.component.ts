@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Game, Player } from './game';
+import { Game, Player, Card, Coordinates } from './game';
 import { ActivatedRoute } from '@angular/router';
 import { GameRestService } from '../game-rest-service.service';
 import { WebsocketService } from '../websocket.service';
@@ -15,10 +15,13 @@ export class GameComponent implements OnInit{
 
   id: string;
   game: Game;
+  gameReady: boolean = false;
   playerName: string;
   player: Player;
+  playerReady: boolean = false;
   isLoaded: boolean = false;
   idCopied: boolean = false;
+  chosenCards: Coordinates = new Coordinates();
 
   message: string;
 
@@ -35,7 +38,7 @@ export class GameComponent implements OnInit{
     this.playerName = this.route.snapshot.params['playerName']
     this.gameService.getGame(this.id).subscribe({
       error: (err) => { console.log(err) },
-      next: (game : Game) => { this.game = game, this.setPlayer(game, this.playerName), this.isLoaded = true }
+      next: (game : Game) => { this.game = game, this.loadGame(game, this.playerName) }
     });
     const gameSub$ = this.websocketService.connect(this.id+this.playerName).pipe(
       takeUntil(this.destroyed$)
@@ -47,7 +50,7 @@ export class GameComponent implements OnInit{
     this.message = message;
     this.gameService.getGame(this.id).subscribe({
       error: (err) => { console.log(err) },
-      next: (game : Game) => { this.game = game, this.isLoaded = true }
+      next: (game : Game) => { this.loadGame(game, this.playerName) }
     });
   }
 
@@ -62,6 +65,39 @@ export class GameComponent implements OnInit{
         this.player = player;
       }
     }
+  }
+
+  loadGame(game: Game, playerName: string) {
+    this.game = game;
+    this.setPlayer(game, playerName);
+    if(game.state != null) {
+      this.gameReady = true;
+    }
+    this.isLoaded = true;
+  }
+
+  launchGame() {
+    console.log("launch game");
+  }
+
+  clickOnCard(l: number, r: number) {
+    if(this.chosenCards.lineCard1 == null) {
+      this.chosenCards.lineCard1 = l;
+      this.chosenCards.rowCard1 = r;
+      this.player.board.grid[r][l].isClicked = true;
+    } else if(this.chosenCards.lineCard2 == null){
+      this.chosenCards.lineCard2 = l;
+      this.chosenCards.rowCard2 = r;
+      this.player.board.grid[r][l].isClicked = true;
+      this.playerReady = true;
+    }
+  }
+  
+
+  declarePlayerReady() {
+    this.gameService.playerReady(this.id, this.playerName, this.chosenCards).subscribe({
+      error: (err) => { console.log(err) }
+    });
   }
 
 }

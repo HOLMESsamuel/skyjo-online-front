@@ -46,26 +46,32 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="block">
+                    <button class="button is-primary" (click)="launchGame()" [disabled]="gameReady ? null : true">Launch game</button>
+                </div>
             </div>
             <div class="column box block">
-                <div>
+                <div class="block">
                     {{player.name}}, choose two cards to begin.
                 </div>
-                <div id="board">
+                <div id="board" class="block">
                     <table class="table is-bordered is-centered">
                         <tbody>
-                            <tr *ngFor="let line of player.board.grid">
-                                <th *ngFor="let card of line">
-                                    <button class="button is-primary is-active" *ngIf="card.visible; else elseBlock">
+                            <tr *ngFor="let line of player.board.grid, index as r">
+                                <th *ngFor="let card of line, index as l">
+                                    <button (click)="clickOnCard(l, r)" class="button is-primary is-active" *ngIf="card.visible; else elseBlock">
                                         {{card.number}}
                                     </button>
                                     <ng-template #elseBlock>
-                                        <button class="button is-primary is-active">X</button>
+                                        <button (click)="clickOnCard(l, r)" class="button is-primary is-active" [disabled]="card.isClicked==null ? null : true">X</button>
                                     </ng-template>
                                 </th>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="block">
+                    <button class="button is-primary" (click)="declarePlayerReady()" [disabled]="playerReady ? null : true">ready</button>
                 </div>
             </div>
         </div>

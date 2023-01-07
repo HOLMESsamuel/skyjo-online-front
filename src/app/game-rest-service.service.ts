@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Game } from './game/game';
+import { Game, Coordinates } from './game/game';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,11 @@ export class GameRestService {
   getGame(gameId: string) {
     let url = this.baseURL + gameId;
     return this.http.get<Game>(url, this.httpOptions);
+  }
+
+  playerReady(gameId: string, playerName: string, coordinates: Coordinates) {
+    let url = this.baseURL + gameId + "/" + playerName + "/ready";
+    return this.http.put<Game>(url, coordinates, this.httpOptions);
   }
 
 }

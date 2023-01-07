@@ -17,9 +17,17 @@ export class Player {
 export class Card {
     number: number;
     visible: boolean;
+    isClicked: boolean;
 }
 
 export class Board {
     score: number;
     grid: Card[][];
+}
+
+export class Coordinates {
+    rowCard1: number;
+    lineCard1: number;
+    rowCard2: number;
+    lineCard2: number;
 }
