@@ -8,10 +8,10 @@ import { takeUntil, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  templateUrl: './preparingGame.component.html',
+  styleUrls: ['./preparingGame.component.css']
 })
-export class GameComponent implements OnInit{
+export class PreparingGameComponent implements OnInit{
 
   id: string;
   game: Game;
@@ -23,8 +23,6 @@ export class GameComponent implements OnInit{
   idCopied: boolean = false;
   chosenCards: Coordinates = new Coordinates();
 
-  message: string;
-
   destroyed$ = new Subject();
 
   constructor(
@@ -34,29 +32,25 @@ export class GameComponent implements OnInit{
     private clipboardService: ClipboardService) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id']
-    this.playerName = this.route.snapshot.params['playerName']
+    this.recoverParamsFromUrl();
+    
+    this.getGame();
+    
+    this.subscribeToWebsocket();
+  }
+
+  ////////// manage game objects /////////
+
+  recoverParamsFromUrl() {
+    this.id = this.route.snapshot.params['id'];
+    this.playerName = this.route.snapshot.params['playerName'];
+  }
+
+  getGame() {
     this.gameService.getGame(this.id).subscribe({
       error: (err) => { console.log(err) },
       next: (game : Game) => { this.game = game, this.loadGame(game, this.playerName) }
     });
-    const gameSub$ = this.websocketService.connect(this.id+this.playerName).pipe(
-      takeUntil(this.destroyed$)
-    );
-    gameSub$.subscribe(message => this.handleMessage(message));
-  }
-
-  handleMessage(message: any) {
-    this.message = message;
-    this.gameService.getGame(this.id).subscribe({
-      error: (err) => { console.log(err) },
-      next: (game : Game) => { this.loadGame(game, this.playerName) }
-    });
-  }
-
-  copyText() {
-    this.clipboardService.copyFromContent(this.id);
-    this.idCopied = true;
   }
 
   setPlayer(game: Game, playerName: string) {
@@ -76,8 +70,33 @@ export class GameComponent implements OnInit{
     this.isLoaded = true;
   }
 
+  //subscribe to websocket with id : gameId + playerName which is unique
+  subscribeToWebsocket() {
+    const gameSub$ = this.websocketService.connect(this.id+this.playerName).pipe(
+      takeUntil(this.destroyed$)
+    );
+    gameSub$.subscribe(message => this.handleMessage(message));
+  }
+
+  //called each time a message is received from the websocket, it will always be a json encoded game
+  //recover the game from message and refresh the component game object with the received game
+  handleMessage(message: any) {
+    const game = JSON.parse(message);
+    this.loadGame(game, this.playerName);
+  }
+
+
+  ////////// manage game actions /////////
+
+  copyText() {
+    this.clipboardService.copyFromContent(this.id);
+    this.idCopied = true;
+  }
+
   launchGame() {
-    console.log("launch game");
+    this.gameService.startGame(this.id).subscribe({
+      error: (err) => { console.log(err) }
+    });
   }
 
   clickOnCard(l: number, r: number) {
@@ -93,11 +112,15 @@ export class GameComponent implements OnInit{
     }
   }
   
-
   declarePlayerReady() {
     this.gameService.playerReady(this.id, this.playerName, this.chosenCards).subscribe({
       error: (err) => { console.log(err) }
     });
   }
+
+  
+
+  
+  
 
 }

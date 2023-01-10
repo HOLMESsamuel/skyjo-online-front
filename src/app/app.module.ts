@@ -7,13 +7,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ClipboardModule } from 'ngx-clipboard';
 import { StartpageComponent } from './startpage/startpage.component';
 import { HttpClientModule } from '@angular/common/http';
-import { GameComponent } from './game/game.component';
+import { PreparingGameComponent } from './game/preparingGame.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartpageComponent, 
-    GameComponent
+    PreparingGameComponent
   ],
   imports: [
     HttpClientModule,

@@ -38,4 +38,9 @@ export class GameRestService {
     return this.http.put<Game>(url, coordinates, this.httpOptions);
   }
 
+  startGame(gameId: string) {
+    let url = this.baseURL + gameId + "/ready";
+    return this.http.get<Game>(url, this.httpOptions);
+  }
+
 }
