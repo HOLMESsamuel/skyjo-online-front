@@ -1,0 +1,12 @@
+<app-preparing-game 
+[id]="id" 
+[playerName]="playerName" 
+[game]="game" 
+[player]="player" 
+[isLoaded]="isLoaded"
+[gameReady]="gameReady" 
+*ngIf="gameState == 'preparing' || gameState == 'ready'">
+</app-preparing-game>
+
+<app-running-game *ngIf="gameState == 'running'"></app-running-game>
+<router-outlet></router-outlet>
