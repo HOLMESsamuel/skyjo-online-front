@@ -10,12 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { PreparingGameComponent } from './game/preparing-game/preparingGame.component';
 import { GameComponent } from './game/game.component';
 import { RunningGameComponent } from './game/running-game/running-game.component';
+import { RuleModalComponent } from './rule-modal/rule-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartpageComponent, 
-    PreparingGameComponent, GameComponent, RunningGameComponent
+    PreparingGameComponent, GameComponent, RunningGameComponent, RuleModalComponent
   ],
   imports: [
     HttpClientModule,

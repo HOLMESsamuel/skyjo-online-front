@@ -1,0 +1,25 @@
+<button id="modalbutton" (click)="toogleModal()" class="button is-medium">?</button>
+<div [ngClass]="(isActive) ? 'is-active' : ''" class="modal">
+    <div (click)="toogleModal()" class="modal-background"></div>
+    <div class="modal-card block">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Skyjo Rules</p>
+        <button (click)="toogleModal()" class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body block content">
+        <div class="block">
+            <ol>
+                <li>The game is played with a deck of cards, which includes number cards from -2 to 12.</li>
+                <li>Each player starts with a board of cards turned face down, the goal is to discover all your cards and that the sum of them is inferior to the other players.</li>
+                <li>On your turn, you can either draw a card from the deck or take the top card from the discard pile.</li>
+                <li>You can then play that card by replacing any of your board card with it or dicard it and turn one of your cards face up.</li>
+                <li>When you have a column of identical cards they all turn 0.</li>
+                <li>The round ends when one player has all his cards face up, then each player except him can play one last turn.</li>
+                <li>Points are scored based on the number of cards remaining in each player's board, and the player with the lowest score at the end of the game wins.</li>
+                <li>The game can be played with 2-8 players.</li>
+              </ol>
+        </div>
+        
+      </section>
+    </div>
+  </div>
