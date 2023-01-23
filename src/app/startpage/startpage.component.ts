@@ -66,6 +66,10 @@ export class StartpageComponent {
       this.setErrorJoinGameMessage("This game id does not exists");
     } else if(error.status == 409) {
       this.setErrorJoinGameMessage("This player name is already used");
+    } else if(error.status == 403) {
+      this.setErrorJoinGameMessage("This game has already started");
+    } else if(error.status == 423) {
+      this.setErrorJoinGameMessage("There are already 8 players in the game");
     } else {
       this.setErrorJoinGameMessage("There was an error while calling the server");
     }
