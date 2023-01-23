@@ -11,7 +11,6 @@ export class RuleModalComponent {
 
   toogleModal() {
     this.isActive = !this.isActive;
-    console.log(this.isActive);
   }
 
 }
