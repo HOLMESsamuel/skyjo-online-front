@@ -2,6 +2,7 @@ export class Game {
     id: string;
     state: string;
     players: Array<Player>;
+    deck: DecodeErrorCallback;
 
 
 }
@@ -12,6 +13,7 @@ export class Player {
     cardInHand: Card;
     board: Board;
     score: number;
+    playerTurn: boolean;
 }
 
 export class Card {
@@ -30,4 +32,14 @@ export class Coordinates {
     lineCard1: number;
     rowCard2: number;
     lineCard2: number;
+}
+
+export class Deck {
+    removedCards: Card[];
+}
+
+export class Choice {
+    choiceString: string;
+    row: number;
+    line: number;
 }

@@ -1,4 +1,63 @@
-<div>
-    <h1>running game</h1>
+
+<div class="is-overlay has-background-dark">
+    <section class="hero is-info has-background-dark is-align-items-center">
+
+        <div class="hero-body">
+            <div class="title has-text-centered">
+                Skyjo online
+            </div>
+        </div>
+
+    </section>
+    <div *ngIf="[isLoaded]" class="container is-max-widescreen is-flex">
+        <div class="tile is-ancestor is-flex-wrap-wrap">
+            <div class="tile is-parent is-12 is-justify-content-center has-text-white">
+                <div *ngIf="player.playerTurn; else elseBlock">{{player.name}}, it is your time to shine ! choose a card from either the deck or the discarded cards and play it or drop it to reveal one of your cards.</div>
+                <ng-template #elseBlock></ng-template>
+            </div>
+            <div class="tile is-parent is-12 is-justify-content-center">
+                <button (click)="chooseCardFromDeck()" class="button is-primary is-active deck" [disabled]="player.playerTurn ? null : true">Deck</button>
+                <button (click)="chooseDiscardedCard()" class="button is-primary is-active deck" [disabled]="player.playerTurn ? null : true">{{game.deck.removedCards[game.deck.removedCards.length - 1].number}}</button>
+            </div>
+            <div id="board" class="tile is-4 is-parent is-justify-content-center" *ngFor="let oneplayer of game.players">
+                <div class="block box is-child" [ngClass]="oneplayer.playerTurn ? 'player-turn': ''">
+                    <table class="table is-bordered is-centered">
+                        <div>
+                            {{oneplayer.name}}
+                        </div>
+                        <tbody>
+                            <tr *ngFor="let line of oneplayer.board.grid, index as r">
+                                <th *ngFor="let card of line, index as l">
+                                    <button (click)="makeAction(l, r)" class="button is-primary is-active" [disabled]="oneplayer.name == player.name && oneplayer.playerTurn ? null : true" *ngIf="card.visible; else elseBlock">
+                                        {{card.number}}
+                                    </button>
+                                    <ng-template #elseBlock>
+                                        <button (click)="makeAction(l, r)" class="button is-primary is-active" [disabled]="oneplayer.name == player.name && oneplayer.playerTurn ? null : true">?</button>
+                                    </ng-template>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div [ngClass]="(isModalActive) ? 'is-active' : ''" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card block">
+      <header class="modal-card-head">
+        <p *ngIf="player.cardInHand != null" class="modal-card-title">You have picked a {{player.cardInHand.number}}</p>
+      </header>
+      <section class="modal-card-body block content">
+        <div class="block">
+            <p>You can choose to replace any of your board cards with the card you have just chosen, or to drop it and just reveal some hidden card of your board.</p>
+            <button (click)="choosePlaceCard()" class="button is-primary">Place card</button>
+            <button (click)="chooseDropCard()" class="button is-primary">Drop Card</button>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+    </footer>
+    </div>
 </div>
 <app-rule-modal></app-rule-modal>

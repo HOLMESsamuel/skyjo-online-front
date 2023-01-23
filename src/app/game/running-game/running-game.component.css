@@ -1,0 +1,22 @@
+#board {
+    margin: 0px;
+}
+
+.player-turn {
+    border: solid;
+    border-width: 5px;
+    border-color: green;
+}
+
+.deck {
+    margin: 5px;
+}
+
+.table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-card-body {
+    margin-bottom: 0;
+}

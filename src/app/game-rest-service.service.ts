@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Game, Coordinates } from './game/game';
+import { Game, Coordinates, Choice } from './game/game';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +41,16 @@ export class GameRestService {
   startGame(gameId: string) {
     let url = this.baseURL + gameId + "/ready";
     return this.http.get<Game>(url, this.httpOptions);
+  }
+
+  chooseCard(gameId: string, playerName: string, choice: Choice) {
+    let url = this.baseURL + gameId + "/" + playerName + "/hand";
+    return this.http.put<Game>(url, choice, this.httpOptions);
+  }
+
+  playCard(gameId: string, playerName: string, choice: Choice) {
+    let url = this.baseURL + gameId + "/" + playerName + "/board";
+    return this.http.put<Game>(url, choice, this.httpOptions);
   }
 
 }
