@@ -3,6 +3,8 @@ import { Game, Player, Coordinates } from '../game';
 import { GameRestService } from '../../game-rest-service.service';
 import { ClipboardService } from 'ngx-clipboard';
 import { takeUntil, Subject } from 'rxjs';
+import { CardService } from 'src/app/card.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preparing-game',
@@ -26,7 +28,8 @@ export class PreparingGameComponent {
 
   constructor(
     private gameService: GameRestService, 
-    private clipboardService: ClipboardService) {
+    private clipboardService: ClipboardService, 
+    private cardService: CardService) {
     }
 
 

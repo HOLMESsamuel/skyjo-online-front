@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Choice, Game, Player } from '../game';
 import { GameRestService } from 'src/app/game-rest-service.service';
+import { CardService } from 'src/app/card.service';
 
 @Component({
   selector: 'app-running-game',
@@ -18,7 +19,8 @@ export class RunningGameComponent {
   choice: Choice = new Choice();
   isModalActive : boolean = false;
 
-  constructor( private gameService: GameRestService) {}
+  constructor( private gameService: GameRestService,
+    private cardService: CardService) {}
 
   toogleModal() {
     this.isModalActive = !this.isModalActive;

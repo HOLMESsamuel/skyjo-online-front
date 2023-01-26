@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GameRestService } from '../game-rest-service.service';
 import { WebsocketService } from '../websocket.service';
-import { Game, Player } from './game';
+import { Card, Game, Player } from './game';
 import { GameDataService } from './game-data.service';
 
 @Component({
@@ -87,4 +87,5 @@ export class GameComponent implements OnInit{
     const game = JSON.parse(message);
     this.gameDataService.loadGame(game, this.playerName);
   }
+
 }

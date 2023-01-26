@@ -20,6 +20,7 @@ export class Card {
     number: number;
     visible: boolean;
     isClicked: boolean;
+    eliminated: boolean;
 }
 
 export class Board {

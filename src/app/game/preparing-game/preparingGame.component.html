@@ -59,11 +59,11 @@
                         <tbody>
                             <tr *ngFor="let line of player.board.grid, index as r">
                                 <th *ngFor="let card of line, index as l">
-                                    <button (click)="clickOnCard(l, r)" class="button is-primary is-active" *ngIf="card.visible; else elseBlock">
+                                    <button (click)="clickOnCard(l, r)" class="button is-large is-active" [ngClass]="cardService.cardColor(card)" *ngIf="card.visible; else elseBlock">
                                         {{card.number}}
                                     </button>
                                     <ng-template #elseBlock>
-                                        <button (click)="clickOnCard(l, r)" class="button is-primary is-active" [disabled]="card.isClicked==null ? null : true">?</button>
+                                        <button (click)="clickOnCard(l, r)" class="button is-large is-active" [ngClass]="cardService.cardColor(card)" [disabled]="card.isClicked==null ? null : true">?</button>
                                     </ng-template>
                                 </th>
                             </tr>
@@ -79,4 +79,3 @@
 </div>
 
 <app-rule-modal></app-rule-modal>
-<router-outlet></router-outlet>

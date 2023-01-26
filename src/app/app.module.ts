@@ -11,12 +11,17 @@ import { PreparingGameComponent } from './game/preparing-game/preparingGame.comp
 import { GameComponent } from './game/game.component';
 import { RunningGameComponent } from './game/running-game/running-game.component';
 import { RuleModalComponent } from './rule-modal/rule-modal.component';
+import { EndingGameComponent } from './game/ending-game/ending-game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartpageComponent, 
-    PreparingGameComponent, GameComponent, RunningGameComponent, RuleModalComponent
+    PreparingGameComponent, 
+    GameComponent, 
+    RunningGameComponent, 
+    RuleModalComponent, 
+    EndingGameComponent
   ],
   imports: [
     HttpClientModule,
