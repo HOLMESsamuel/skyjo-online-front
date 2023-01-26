@@ -16,4 +16,10 @@
 [isLoaded]="isLoaded"
 [gameReady]="gameReady"
 *ngIf="gameState == 'running'"></app-running-game>
+
+<app-ending-game
+[id]="id"
+[game]="game"
+[isLoaded]="isLoaded"
+*ngIf="gameState == 'finish'"></app-ending-game> 
 <router-outlet></router-outlet>

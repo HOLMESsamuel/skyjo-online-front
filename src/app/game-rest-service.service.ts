@@ -53,4 +53,14 @@ export class GameRestService {
     return this.http.put<Game>(url, choice, this.httpOptions);
   }
 
+  deleteGame(gameId: string) {
+    let url = this.baseURL + gameId;
+    return this.http.delete<Game>(url, this.httpOptions);
+  }
+
+  resetGame(gameId: string) {
+    let url = this.baseURL + gameId + "/new-game";
+    return this.http.put<Game>(url, this.httpOptions);
+  }
+
 }
