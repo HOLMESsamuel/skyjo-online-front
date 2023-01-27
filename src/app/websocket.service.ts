@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Observable } from 'rxjs';
+import { environment } from './environments/environment';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class WebsocketService {
 
   connect(id: string): Observable<any> {
     this.connection$ = webSocket({
-      url: 'ws://localhost:8080/websocket/games/' + id,
+      url: environment.websocketUrl + id,
       deserializer: ({data}) => data,
       serializer: ({data}) => data,
     });
