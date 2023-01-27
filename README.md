@@ -66,13 +66,17 @@ The project has a github action with multiple steps that aims at creating a dock
 see the dockerfile and see the github actions steps in ci.yml file.
 The image is then pushed to a docker hub repository
 
+# DNS
+
+The domain skyjo-online.com is linked to the server ip thanks to google domains dns server.
+
 # Deployment
 
 A docker-compose.yml file is used to declare the deployment structure.
 It allows to deploy the front end along with the backend on the same host and only one command : docker-compose up.
 Basically it pulls both front end and backend docker images, runs the containers and creates a network to allow them to communicate.
 
-The host is a 1Gb ram 1CPU linux ubuntu amd 64 instance on oracle cloud, a virtual network is also provided by oracle cloud to connect the instance to the internet, the port 80 (http), 443 (https), 4200 and 8080 are open to TCP transport on this virtual network to allow communication to the front end and between back and front.
-The host IP adress is 141.145.192.67
+The host is a 1Gb ram 1CPU linux ubuntu amd 64 instance on oracle cloud, a virtual network is also provided by oracle cloud to connect the instance to the internet, the port 80 (http), 443 (https) and 8080 are open to TCP transport on this virtual network to allow communication to the front end and between back and front.
+The host IP adress is 141.145.192.67, the container is exposing the frontend 80 port to the outside, since it is the default port we can access it with the website without specifying any port.
 
 
