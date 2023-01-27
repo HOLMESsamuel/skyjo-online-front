@@ -10,27 +10,51 @@
 
     </section>
     <div *ngIf="[isLoaded]" class="container is-max-widescreen is-flex">
-        <div class="box block">
-            <table class="table is-bordered is-centered">
-                <thead>
-                    <tr>
-                        <th>Player name</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let player of game.players">
-                        <th>{{player.name}}</th>
-                        <th class="has-text-success">{{player.score}}</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="block">
-            <button class="button is-primary" (click)="deleteGame()">delete game</button>
-        </div>
-        <div class="block">
-            <button class="button is-primary" (click)="resetGame()">play again</button>
+        <div class="tile is-ancestor is-flex-wrap-wrap">
+            <div class="tile is-parent is-12 is-justify-content-center has-text-white">
+                <div class="box block">
+                    <table class="table is-bordered is-centered">
+                        <thead>
+                            <tr>
+                                <th>Player name</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let player of game.players">
+                                <th>{{player.name}}</th>
+                                <th class="has-text-success">{{player.score}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="block">
+                        <button class="button is-primary" (click)="deleteGame()">delete game</button>
+                    </div>
+                    <div class="block">
+                        <button class="button is-primary" (click)="resetGame()">play again</button>
+                    </div>
+                </div>
+                
+            </div>
+           
+            <div id="board" class="tile is-6 is-parent is-justify-content-center" *ngFor="let oneplayer of game.players">
+                <div class="block box is-child">
+                    <table class="table is-bordered is-centered">
+                        <div>
+                            {{oneplayer.name}}
+                        </div>
+                        <tbody>
+                            <tr *ngFor="let line of oneplayer.board.grid, index as r">
+                                <th *ngFor="let card of line, index as l">
+                                    <button class="button is-large is-active" [ngClass]="cardService.cardColor(card)">
+                                        {{card.number}}
+                                    </button>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

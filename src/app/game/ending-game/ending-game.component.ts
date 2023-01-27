@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { CardService } from 'src/app/card.service';
 import { GameRestService } from 'src/app/game-rest-service.service';
 import { Game } from '../game';
 
@@ -16,7 +17,8 @@ export class EndingGameComponent {
 
   constructor(
     private gameRestService: GameRestService,
-    private router: Router
+    private router: Router,
+    private cardService: CardService
   ) {
 
   }
