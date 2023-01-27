@@ -36,6 +36,7 @@ export class RunningGameComponent {
     this.gameService.playCard(this.id, this.playerName, this.choice).subscribe({
       error: (err) => { console.log(err) }
     });
+    this.choice.choiceString = null;
   }
 
   chooseCardFromDeck() {

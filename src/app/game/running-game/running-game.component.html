@@ -16,8 +16,8 @@
                 <ng-template #elseBlock></ng-template>
             </div>
             <div class="tile is-parent is-12 is-justify-content-center">
-                <button (click)="chooseCardFromDeck()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn ? true : null">Deck</button>
-                <button (click)="chooseDiscardedCard()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn ? true : null">{{game.deck.removedCards[game.deck.removedCards.length - 1].number}}</button>
+                <button (click)="chooseCardFromDeck()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">Deck</button>
+                <button (click)="chooseDiscardedCard()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">{{game.deck.removedCards[game.deck.removedCards.length - 1].number}}</button>
             </div>
             <div id="board" class="tile is-6 is-parent is-justify-content-center" *ngFor="let oneplayer of game.players">
                 <div class="block box is-child" [ngClass]="oneplayer.playerTurn ? 'player-turn': ''">
@@ -28,7 +28,7 @@
                         <tbody>
                             <tr *ngFor="let line of oneplayer.board.grid, index as r">
                                 <th *ngFor="let card of line, index as l">
-                                    <button (click)="makeAction(l, r)" class="button is-large is-active" [ngClass]="cardService.cardColor(card)" [disabled]="card.eliminated || oneplayer.name != player.name || !oneplayer.playerTurn ? true : null" *ngIf="card.visible; else elseBlock">
+                                    <button (click)="makeAction(l, r)" class="button is-large is-active" [ngClass]="cardService.cardColor(card)" [disabled]="card.eliminated || oneplayer.name != player.name || !oneplayer.playerTurn || (choice.choiceString === 'drop') ? true : null" *ngIf="card.visible; else elseBlock">
                                         {{card.number}}
                                     </button>
                                     <ng-template #elseBlock>
@@ -52,8 +52,10 @@
       <section class="modal-card-body block content">
         <div class="block">
             <p>You can choose to replace any of your board cards with the card you have just chosen, or to drop it and just reveal some hidden card of your board.</p>
-            <button (click)="choosePlaceCard()" class="button is-primary">Place card</button>
-            <button (click)="chooseDropCard()" class="button is-primary">Drop Card</button>
+            <div class="is-justify-content-center is-flex">
+                <button (click)="choosePlaceCard()" class="button is-primary choice-button">Place card</button>
+                <button (click)="chooseDropCard()" class="button is-primary choice-button" [disabled]="choice.choiceString == 'removed' ? true : null">Drop Card</button>
+            </div>
         </div>
       </section>
       <footer class="modal-card-foot">
