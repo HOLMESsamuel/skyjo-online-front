@@ -10,14 +10,14 @@
                 <div class="level-left">
                   <div class="level-item block">
                     <p *ngIf="isLoaded" class="subtitle level-left level-item">
-                        game id is {{game.id}}
+                        Welcome ! copy the game id to share it with your friends 
                     </p>
                   </div>
                 </div>
               
                 <!-- Right side -->
                 <div class="level-right block">
-                    <button class="button level-item is-primary is-active" (click)="copyText()">
+                    <button class="button level-item is-primary is-active copy-button" (click)="copyText()">
                         <div *ngIf="idCopied">Copied</div>
                         <div *ngIf="!idCopied">Copy ID</div>
                     </button>
@@ -27,8 +27,8 @@
 
     </section>
     <div *ngIf="[isLoaded]" class="container is-max-widescreen is-centered">
-        <div class="columns">
-            <div class="column is-one-quarter">
+        <div class="tile is-ancestor is-flex-wrap-wrap">
+            <div class="tile is-parent is-6 is-justify-content-center">
                 <div class="box block">
                     <table class="table is-bordered is-centered">
                         <thead>
@@ -45,16 +45,16 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="block">
-                    <button class="button is-primary" (click)="launchGame()" [disabled]="gameReady ? null : true">Launch game</button>
+                    <div class="block">
+                        <button class="button is-primary" (click)="launchGame()" [disabled]="gameReady ? null : true">Launch game</button>
+                    </div>
                 </div>
             </div>
-            <div class="column box block">
-                <div class="block">
-                    {{player.name}}, choose two cards to begin.
-                </div>
+            <div id="board" class="tile is-4 box is-parent is-justify-content-center">
                 <div id="board" class="block">
+                    <div class="block">
+                        {{player.name}}, choose two cards to begin.
+                    </div>
                     <table class="table is-bordered is-centered">
                         <tbody>
                             <tr *ngFor="let line of player.board.grid, index as r">
@@ -69,9 +69,9 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="block">
-                    <button class="button is-primary" (click)="declarePlayerReady()" [disabled]="playerReady ? null : true">ready</button>
+                    <div class="block">
+                        <button class="button is-primary" (click)="declarePlayerReady()" [disabled]="playerReady ? null : true">ready</button>
+                    </div>
                 </div>
             </div>
         </div>
