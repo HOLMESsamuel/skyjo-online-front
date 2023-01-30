@@ -11,19 +11,21 @@
         </div>
     </section>
     <section class="container is-max-desktop has-background-dark">
+      <div class="form">
         <div class="box block">
-            <p class="block">Create a game and share the ID to other players</p>
-            <input #newGamePlayerName class="input is-info block" type="text" placeholder="Name">
-            <div class="block has-text-danger" *ngIf="errorNewGame">{{errorNewGameMessage}}</div>
-            <button (click)="launchGame(newGamePlayerName.value)" class="button block">Launch Game</button>
+          <p class="block">Create a game and share the ID to other players</p>
+          <input #newGamePlayerName class="input is-info block" type="text" placeholder="Name">
+          <div class="block has-text-danger" *ngIf="errorNewGame">{{errorNewGameMessage}}</div>
+          <button (click)="launchGame(newGamePlayerName.value)" class="button block">Launch Game</button>
         </div>
         <div class="box block">
-            <p class="block">Join an existing game thanks to the ID</p>
-            <input #joinGamePlayerName class="input is-info block" type="text" placeholder="Name">
-            <input #joinGameId class="input is-info block" type="text" placeholder="Game ID">
-            <div class="block has-text-danger" *ngIf="errorJoinGame">{{errorJoinGameMessage}}</div>
-            <button (click)="joinGame(joinGameId.value, joinGamePlayerName.value)" class="button block">Join Game</button>
+          <p class="block">Join an existing game thanks to the ID</p>
+          <input #joinGamePlayerName class="input is-info block" type="text" placeholder="Name">
+          <input #joinGameId class="input is-info block" type="text" placeholder="Game ID">
+          <div class="block has-text-danger" *ngIf="errorJoinGame">{{errorJoinGameMessage}}</div>
+          <button (click)="joinGame(joinGameId.value, joinGamePlayerName.value)" class="button block">Join Game</button>
         </div>
+      </div>
     </section>
 </div>
 <app-rule-modal></app-rule-modal>
