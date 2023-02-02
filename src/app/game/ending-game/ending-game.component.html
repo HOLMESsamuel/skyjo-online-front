@@ -1,5 +1,4 @@
-
-<div class="is-overlay has-background-dark">
+<div id="background" class="is-overlay has-background-dark">
     <section class="hero is-info has-background-dark is-align-items-center">
 
         <div class="hero-body">
@@ -46,7 +45,7 @@
                         <tbody>
                             <tr *ngFor="let line of oneplayer.board.grid, index as r">
                                 <th *ngFor="let card of line, index as l">
-                                    <button class="button is-large is-active" [ngClass]="cardService.cardColor(card)">
+                                    <button class="card-button button is-responsive is-large is-active" [ngClass]="cardService.cardColor(card)">
                                         {{card.number}}
                                     </button>
                                 </th>

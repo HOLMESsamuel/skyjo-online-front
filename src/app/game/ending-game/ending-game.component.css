@@ -1,0 +1,17 @@
+#background {
+    overflow: auto;
+}
+
+.card-button {
+    min-width: 75px;
+}
+
+@media screen and (max-width: 1100px) {
+    .is-ancestor {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .card-button {
+        min-width: 50px;
+    }
+}
