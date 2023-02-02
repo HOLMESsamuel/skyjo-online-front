@@ -8,3 +8,10 @@
 .rules-list {
     margin-bottom: 0;
 }
+
+@media screen and (max-width: 1100px) {
+    .modal {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

@@ -20,9 +20,7 @@ export class GameDataService {
     this.game.next(game);
     this.setPlayer(game, playerName);
     this.gameState.next(game.state);
-    if(game.state == 'ready') {
-      this.gameReady.next(true);
-    }
+    this.gameReady.next(game.state == 'ready');
     this.isLoaded.next(true);
   }
 
