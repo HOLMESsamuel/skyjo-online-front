@@ -17,7 +17,7 @@
             </div>
             <div class="tile is-parent is-12 is-justify-content-center">
                 <button (click)="chooseCardFromDeck()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">Deck</button>
-                <button (click)="chooseDiscardedCard()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">{{game.deck.removedCards[game.deck.removedCards.length - 1].number}}</button>
+                <button *ngIf="game.deck.removedCards.length > 0" (click)="chooseDiscardedCard()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">{{game.deck.removedCards[game.deck.removedCards.length - 1].number}}</button>
             </div>
             <div id="board" class="tile is-6 is-parent is-justify-content-center" *ngFor="let oneplayer of game.players">
                 <div class="block box is-child" [ngClass]="oneplayer.playerTurn ? 'player-turn': ''">
