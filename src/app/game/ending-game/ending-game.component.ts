@@ -7,7 +7,7 @@ import { Game } from '../game';
 @Component({
   selector: 'app-ending-game',
   templateUrl: './ending-game.component.html',
-  styleUrls: ['./ending-game.component.css']
+  styleUrls: ['./ending-game.component.css', '../../../styles.css']
 })
 export class EndingGameComponent {
   @Input() id: string;
