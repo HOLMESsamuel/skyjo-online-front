@@ -9,7 +9,7 @@
         </div>
 
     </section>
-    <div *ngIf="[isLoaded]" class="container is-max-widescreen is-flex">
+    <div *ngIf="[isLoaded]" class="body container is-max-widescreen is-flex">
         <div class="tile is-ancestor is-flex-wrap-wrap">
             <div class="tile is-parent is-12 is-justify-content-center has-text-white">
                 <div *ngIf="player.playerTurn; else elseBlock">{{player.name}}, it is your time to shine ! choose a card from either the deck or the discarded cards and play it or drop it to reveal one of your cards.</div>
@@ -21,8 +21,8 @@
             </div>
             <div id="board" class="tile is-6 is-parent is-justify-content-center" *ngFor="let oneplayer of game.players">
                 <div class="block box is-child" [ngClass]="oneplayer.playerTurn ? 'player-turn': ''">
-                    <table class="table is-bordered is-centered">
-                        <div>
+                    <table class="table is-centered">
+                        <div class="player-name">
                             {{oneplayer.name}}
                         </div>
                         <tbody>

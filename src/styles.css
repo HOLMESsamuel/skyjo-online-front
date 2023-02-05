@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+.is-red {
+    background-color: #F12819;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    border: none;
+}
+
+.is-purple {
+    background-color: #4554aad3;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    border: none;
+}
+
+.is-blue {
+    background-color: #5FC9EB;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    border: none;
+}
+
+.is-green {
+    background-color: #54B753;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    border: none;
+}
+
+.is-yellow {
+    background-color: #e7d941e1;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    border: none;
+}
+
+.is-primary {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+
+.is-primary {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+
+.player-name {
+    font-size: large;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.body {
+    margin-bottom: 100px;
+}
