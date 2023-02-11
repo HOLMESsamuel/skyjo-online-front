@@ -42,4 +42,15 @@
     .card-button {
         min-width: 50px;
     }
+    .modal {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
+
+
+  .text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

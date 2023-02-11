@@ -11,13 +11,12 @@
     </section>
     <div *ngIf="[isLoaded]" class="body container is-max-widescreen is-flex">
         <div class="tile is-ancestor is-flex-wrap-wrap">
-            <div class="tile is-parent is-12 is-justify-content-center has-text-white">
-                <div *ngIf="player.playerTurn; else elseBlock">{{player.name}}, it is your time to shine ! choose a card from either the deck or the discarded cards and play it or drop it to reveal one of your cards.</div>
-                <ng-template #elseBlock></ng-template>
+            <div class="text-container tile is-parent is-12 is-justify-content-center has-text-white">
+                <div id="typedText" [innerHTML]="typedText"> </div>
             </div>
             <div class="tile is-parent is-12 is-justify-content-center">
                 <button (click)="chooseCardFromDeck()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">Deck</button>
-                <button (click)="chooseDiscardedCard()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">{{game.deck.removedCards[game.deck.removedCards.length - 1].number}}</button>
+                <button *ngIf="game.deck.removedCards.length > 0" (click)="chooseDiscardedCard()" class="card-button button is-large is-active deck" [ngClass]="cardColorClass(game.deck.removedCards[game.deck.removedCards.length - 1])" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">{{game.deck.removedCards[game.deck.removedCards.length - 1].number}}</button>
             </div>
             <div id="board" class="tile is-6 is-parent is-justify-content-center" *ngFor="let oneplayer of game.players">
                 <div class="block box is-child" [ngClass]="oneplayer.playerTurn ? 'player-turn': ''">
@@ -47,7 +46,12 @@
     <div class="modal-background"></div>
     <div class="modal-card block">
       <header class="modal-card-head">
-        <p *ngIf="player.cardInHand != null" class="modal-card-title">You have picked a {{player.cardInHand.number}}</p>
+        <div *ngIf="player.cardInHand != null" class="is-flex is-justify-content-center is-align-items-center">
+            <div class="modal-card-title" style="margin-right: 10px;">You have picked a </div>
+            <button class="card-button button is-responsive is-large is-active" [ngClass]="cardColorClass(player.cardInHand)">
+                {{player.cardInHand.number}}
+            </button>
+        </div>
       </header>
       <section class="modal-card-body block content">
         <div class="block">
