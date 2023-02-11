@@ -8,7 +8,7 @@
         </div>
 
     </section>
-    <div *ngIf="[isLoaded]" class="container is-max-widescreen is-flex">
+    <div *ngIf="[isLoaded]" class="body container is-max-widescreen is-flex">
         <div class="tile is-ancestor is-flex-wrap-wrap">
             <div class="tile is-parent is-12 is-justify-content-center has-text-white">
                 <div class="box block">
@@ -38,7 +38,7 @@
            
             <div id="board" class="tile is-6 is-parent is-justify-content-center" *ngFor="let oneplayer of game.players">
                 <div class="block box is-child">
-                    <table class="table is-bordered is-centered">
+                    <table class="player-name table is-centered">
                         <div>
                             {{oneplayer.name}}
                         </div>
