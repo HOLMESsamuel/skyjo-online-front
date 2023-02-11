@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-preparing-game',
   templateUrl: './preparingGame.component.html',
-  styleUrls: ['./preparingGame.component.css']
+  styleUrls: ['./preparingGame.component.css', '../../../styles.css']
 })
 export class PreparingGameComponent {
 

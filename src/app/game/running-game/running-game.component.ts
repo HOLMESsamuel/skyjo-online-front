@@ -6,7 +6,7 @@ import { CardService } from 'src/app/card.service';
 @Component({
   selector: 'app-running-game',
   templateUrl: './running-game.component.html',
-  styleUrls: ['./running-game.component.css']
+  styleUrls: ['./running-game.component.css', '../../../styles.css']
 })
 export class RunningGameComponent implements AfterContentInit, OnChanges{
   @Input() id: string;

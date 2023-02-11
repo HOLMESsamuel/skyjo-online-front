@@ -13,15 +13,15 @@ export class CardService {
       return 'is-primary';
     } else {
       if(card.number < 0) {
-        return 'is-link';
+        return 'is-purple';
       } else if (card.number == 0) {
-        return 'is-info';
+        return 'is-blue';
       } else if (card.number < 5) {
-        return 'is-success';
+        return 'is-green';
       } else if (card.number < 9){
-        return 'is-warning';
+        return 'is-yellow';
       } else {
-        return 'is-danger';
+        return 'is-red';
       }
     }
   }
