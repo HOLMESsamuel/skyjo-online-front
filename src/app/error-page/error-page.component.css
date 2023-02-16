@@ -1,0 +1,8 @@
+#background {
+    overflow: auto;
+}
+
+.error-message {
+    max-width: 1000px;
+    margin-bottom: 10px;
+}

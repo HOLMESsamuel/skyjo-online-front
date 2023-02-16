@@ -12,6 +12,7 @@ import { GameComponent } from './game/game.component';
 import { RunningGameComponent } from './game/running-game/running-game.component';
 import { RuleModalComponent } from './rule-modal/rule-modal.component';
 import { EndingGameComponent } from './game/ending-game/ending-game.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { EndingGameComponent } from './game/ending-game/ending-game.component';
     GameComponent, 
     RunningGameComponent, 
     RuleModalComponent, 
-    EndingGameComponent
+    EndingGameComponent, ErrorPageComponent
   ],
   imports: [
     HttpClientModule,
