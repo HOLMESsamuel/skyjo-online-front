@@ -2,6 +2,8 @@ import { AfterContentInit, Component, Input, OnChanges, OnInit, SimpleChanges } 
 import { Card, Choice, Game, Player } from '../game';
 import { GameRestService } from 'src/app/game-rest-service.service';
 import { CardService } from 'src/app/card.service';
+import { Constants } from 'src/app/constants';
+import { GlobalErrorHandlerService } from 'src/app/global-error-handler.service';
 
 @Component({
   selector: 'app-running-game',
@@ -23,7 +25,8 @@ export class RunningGameComponent implements AfterContentInit, OnChanges{
   private timer: any;
 
   constructor( private gameService: GameRestService,
-    private cardService: CardService) {}
+    private cardService: CardService,
+    private globalErrorHandlerService: GlobalErrorHandlerService) {}
 
   ngAfterContentInit(): void {
     document.addEventListener('visibilitychange', () => {
@@ -52,45 +55,45 @@ export class RunningGameComponent implements AfterContentInit, OnChanges{
 
   chooseCard() {
     this.gameService.chooseCard(this.id, this.playerName, this.choice).subscribe({
-      error: (err) => { console.log(err) }
+      error: (err) => { this.globalErrorHandlerService.handleError(err) }
     });
   }
 
   playCard() {
     this.gameService.playCard(this.id, this.playerName, this.choice).subscribe({
-      error: (err) => { console.log(err) }
+      error: (err) => { this.globalErrorHandlerService.handleError(err) }
     });
     this.choice.choiceString = null;
   }
 
   chooseCardFromDeck() {
-    this.choice.choiceString = "deck";
+    this.choice.choiceString = Constants.DECK;
     this.chooseCard();
     this.toogleModal();
   }
 
   chooseDiscardedCard() {
-    this.choice.choiceString = "removed";
+    this.choice.choiceString = Constants.REMOVED;
     this.chooseCard();
     this.toogleModal();
   }
 
   choosePlaceCard() {
-    this.choice.choiceString = "replace";
+    this.choice.choiceString = Constants.REPLACE;
     this.toogleModal();
     this.setTextPlayingCard();
     this.typeWriter(this.textToType);
   }
 
   chooseDropCard() {
-    this.choice.choiceString = "drop";
+    this.choice.choiceString = Constants.DROP;
     this.toogleModal();
     this.setTextPlayingCard();
     this.typeWriter(this.textToType);
   }
 
   makeAction(l, r) {
-    if(this.choice.choiceString == "drop" || this.choice.choiceString == "replace") {
+    if(this.choice.choiceString == Constants.DROP || this.choice.choiceString == Constants.REPLACE) {
       this.choice.line = l;
       this.choice.row = r;
       this.playCard();
@@ -106,9 +109,9 @@ export class RunningGameComponent implements AfterContentInit, OnChanges{
   }
 
   setTextPlayingCard() {
-    if(this.choice.choiceString == "replace") {
+    if(this.choice.choiceString == Constants.REPLACE) {
       this.textToType = "you picked a " + this.player.cardInHand.number + " now place it on your board."
-    } else if(this.choice.choiceString == "drop") {
+    } else if(this.choice.choiceString == Constants.DROP) {
       this.textToType = "you dropped a " + this.player.cardInHand.number + " now choose a card to reveal."
     }
   }

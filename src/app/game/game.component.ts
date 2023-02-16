@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GameRestService } from '../game-rest-service.service';
+import { GlobalErrorHandlerService } from '../global-error-handler.service';
 import { WebsocketService } from '../websocket.service';
 import { Card, Game, Player } from './game';
 import { GameDataService } from './game-data.service';
@@ -27,7 +28,8 @@ export class GameComponent implements OnInit{
     private gameDataService: GameDataService,
     private route: ActivatedRoute,
     private gameService: GameRestService,
-    private websocketService: WebsocketService) {
+    private websocketService: WebsocketService,
+    private globalErrorHandlerService: GlobalErrorHandlerService) {
 
       this.gameDataService.getId().subscribe(id => {
         this.id = id;
@@ -68,7 +70,7 @@ export class GameComponent implements OnInit{
 
   getGame() {
     this.gameService.getGame(this.id).subscribe({
-      error: (err) => { console.log(err) },
+      error: (err) => { this.globalErrorHandlerService.handleError(err) },
       next: (game : Game) => { this.gameDataService.loadGame(game, this.playerName) }
     });
   }

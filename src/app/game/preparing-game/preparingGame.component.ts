@@ -1,17 +1,16 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { Game, Player, Coordinates } from '../game';
 import { GameRestService } from '../../game-rest-service.service';
 import { ClipboardService } from 'ngx-clipboard';
 import { takeUntil, Subject } from 'rxjs';
 import { CardService } from 'src/app/card.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preparing-game',
   templateUrl: './preparingGame.component.html',
   styleUrls: ['./preparingGame.component.css', '../../../styles.css']
 })
-export class PreparingGameComponent {
+export class PreparingGameComponent implements OnChanges{
 
   @Input() id: string;
   @Input() game: Game;
@@ -24,6 +23,8 @@ export class PreparingGameComponent {
   playerReady: boolean = false;
   chosenCards: Coordinates = new Coordinates();
 
+  
+
   destroyed$ = new Subject();
 
   constructor(
@@ -31,6 +32,25 @@ export class PreparingGameComponent {
     private clipboardService: ClipboardService, 
     private cardService: CardService) {
     }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.isLoaded) {
+      if (changes['player'] ) {
+        this.recoverChosenCards();
+      }
+    }
+  }
+
+  //if the player has already chosen cards, we recover them when the page is refreshed
+  recoverChosenCards() {
+    if(this.chosenCards.rowCard1 != null) {
+      this.player.board.grid[this.chosenCards.rowCard1][this.chosenCards.lineCard1].isClicked = true;
+    }
+    if(this.chosenCards.rowCard2 != null) {
+      this.player.board.grid[this.chosenCards.rowCard2][this.chosenCards.lineCard2].isClicked = true;
+    }
+    
+  }
 
 
   copyText() {
@@ -55,7 +75,7 @@ export class PreparingGameComponent {
       this.player.board.grid[r][l].isClicked = true;
       this.playerReady = true;
     }
-  }
+  }  
   
   declarePlayerReady() {
     this.gameService.playerReady(this.id, this.playerName, this.chosenCards).subscribe({

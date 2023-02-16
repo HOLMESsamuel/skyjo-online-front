@@ -2,8 +2,15 @@
     margin-left: 5px;
 }
 
+.card-button {
+    min-width: 75px;
+}
+
 @media screen and (max-width: 768px) {
     .container {
         width: fit-content;
+    }
+    .card-button {
+        min-width: 50px;
     }
 }

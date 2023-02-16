@@ -12,7 +12,7 @@
     <div *ngIf="[isLoaded]" class="body container is-max-widescreen is-flex">
         <div class="tile is-ancestor is-flex-wrap-wrap">
             <div class="text-container tile is-parent is-12 is-justify-content-center has-text-white">
-                <div id="typedText" [innerHTML]="typedText"> </div>
+                <div id="typedText" [innerHTML]="typedText">test </div>
             </div>
             <div class="tile is-parent is-12 is-justify-content-center">
                 <button (click)="chooseCardFromDeck()" class="button is-large is-primary is-active deck" [disabled]="!player.playerTurn || choice.choiceString != null ? true : null">Deck</button>
