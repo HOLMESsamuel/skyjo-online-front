@@ -29,6 +29,11 @@ export class GameRestService {
     return this.http.put<Game>(url, playerName, this.httpOptions);
   }
 
+  joinBotGame(gameId: string) {
+    let url = this.baseURL + "join/" + gameId + "/bot";
+    return this.http.put<Game>(url, this.httpOptions);
+  }
+
   getGame(gameId: string) {
     let url = this.baseURL + gameId;
     return this.http.get<Game>(url, this.httpOptions);
