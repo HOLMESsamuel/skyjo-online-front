@@ -92,9 +92,9 @@ export class RunningGameComponent implements AfterContentInit, OnChanges{
     this.typeWriter(this.textToType);
   }
 
-  makeAction(l, r) {
+  makeAction(r, c) {
     if(this.choice.choiceString == Constants.DROP || this.choice.choiceString == Constants.REPLACE) {
-      this.choice.line = l;
+      this.choice.column = c;
       this.choice.row = r;
       this.playCard();
     }

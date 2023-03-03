@@ -25,13 +25,13 @@
                             {{oneplayer.name}}
                         </div>
                         <tbody>
-                            <tr *ngFor="let line of oneplayer.board.grid, index as r">
-                                <th *ngFor="let card of line, index as l">
-                                    <button (click)="makeAction(l, r)" class="card-button button is-responsive is-large is-active" [ngClass]="cardService.cardColor(card)" [disabled]="card.eliminated || oneplayer.name != player.name || !oneplayer.playerTurn || (choice.choiceString === 'drop') ? true : null" *ngIf="card.visible; else elseBlock">
+                            <tr *ngFor="let row of oneplayer.board.grid, index as r">
+                                <th *ngFor="let card of row, index as c">
+                                    <button (click)="makeAction(r, c)" class="card-button button is-responsive is-large is-active" [ngClass]="cardService.cardColor(card)" [disabled]="card.eliminated || oneplayer.name != player.name || !oneplayer.playerTurn || (choice.choiceString === 'drop') ? true : null" *ngIf="card.visible; else elseBlock">
                                         {{card.number}}
                                     </button>
                                     <ng-template #elseBlock>
-                                        <button (click)="makeAction(l, r)" class="card-button button is-responsive is-large is-active" [ngClass]="cardService.cardColor(card)" [disabled]="card.eliminated || oneplayer.name != player.name || !oneplayer.playerTurn ? true : null">?</button>
+                                        <button (click)="makeAction(r, c)" class="card-button button is-responsive is-large is-active" [ngClass]="cardService.cardColor(card)" [disabled]="card.eliminated || oneplayer.name != player.name || !oneplayer.playerTurn ? true : null">?</button>
                                     </ng-template>
                                 </th>
                             </tr>

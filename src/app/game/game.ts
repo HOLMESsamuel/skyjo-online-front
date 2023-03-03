@@ -42,5 +42,5 @@ export class Deck {
 export class Choice {
     choiceString: string;
     row: number;
-    line: number;
+    column: number;
 }
