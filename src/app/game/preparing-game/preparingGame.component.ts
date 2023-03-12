@@ -52,6 +52,13 @@ export class PreparingGameComponent implements OnChanges{
     
   }
 
+  addBot() {
+    console.log("add bot");
+    this.gameService.joinBotGame(this.id).subscribe({
+      error: (err) => { console.log(err) }
+    });
+  }
+
 
   copyText() {
     this.clipboardService.copyFromContent(this.id);
