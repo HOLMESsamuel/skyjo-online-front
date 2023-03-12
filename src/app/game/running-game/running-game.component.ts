@@ -40,8 +40,8 @@ export class RunningGameComponent implements AfterContentInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.isLoaded && this.player != null && this.player.playerTurn != null && changes['player'].previousValue != null) {
-      if (changes['player'] && changes['player'].previousValue.playerTurn != changes['player'].currentValue.playerTurn ) {
+    if(this.isLoaded && this.player != null) {
+      if (changes['player'] ) {
         this.setWelcomingText();
       }
     }
