@@ -16,13 +16,21 @@
                         <thead>
                             <tr>
                                 <th>Player name</th>
-                                <th>Score</th>
+                                <th *ngFor="let n of [].constructor(game.numberOfGames); let i = index">
+                                    {{i+1}}
+                                </th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let player of game.players">
-                                <th>{{player.name}}</th>
-                                <th class="has-text-success">{{player.score}}</th>
+                            <tr *ngFor="let playerScore of game.scoreBoard | keyvalue">
+                                <th>{{playerScore.key}}</th>
+                                <th *ngFor="let score of playerScore.value.scores" class="has-text-success">
+                                    {{score}}
+                                </th>
+                                <th>
+                                    {{playerScore.value.totalScore}}
+                                </th>
                             </tr>
                         </tbody>
                     </table>

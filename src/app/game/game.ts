@@ -3,8 +3,8 @@ export class Game {
     state: string;
     players: Array<Player>;
     deck: DecodeErrorCallback;
-
-
+    scoreBoard: Map<string, PlayerScore>;
+    numberOfGames: number;
 }
 
 export class Player {
@@ -43,4 +43,9 @@ export class Choice {
     choiceString: string;
     row: number;
     column: number;
+}
+
+export class PlayerScore {
+    scores: number[];
+    totalScore: number;
 }
