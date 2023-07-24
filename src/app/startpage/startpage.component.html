@@ -14,13 +14,13 @@
       <div class="form">
         <div class="box block">
           <p class="block">Create a game and share the ID to other players</p>
-          <input #newGamePlayerName class="input is-info block" type="text" placeholder="Name">
+          <input #newGamePlayerName class="input is-info block" type="text" placeholder="Your name">
           <div class="block has-text-danger" *ngIf="errorNewGame">{{errorNewGameMessage}}</div>
           <button (click)="launchGame(newGamePlayerName.value)" class="button block">Launch Game</button>
         </div>
         <div class="box block">
           <p class="block">Join an existing game thanks to the ID</p>
-          <input #joinGamePlayerName class="input is-info block" type="text" placeholder="Name">
+          <input #joinGamePlayerName class="input is-info block" type="text" placeholder="Your name">
           <input #joinGameId class="input is-info block" type="text" placeholder="Game ID">
           <div class="block has-text-danger" *ngIf="errorJoinGame">{{errorJoinGameMessage}}</div>
           <button (click)="joinGame(joinGameId.value, joinGamePlayerName.value)" class="button block">Join Game</button>
